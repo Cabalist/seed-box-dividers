@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shoebox-seed-organizer"
+version = "0.1.0"
+description = "Generate SVG laser-cut divider inserts for a shoebox seed organizer"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "mypy",
+    "prek",
+    "pytest",
+    "ruff",
+]
+
+[project.scripts]
+shoebox-seed-organizer = "shoebox_seed_organizer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.ruff]
+target-version = "py314"
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "F",      # pyflakes
+    "I",      # isort
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "SIM",    # flake8-simplify
+    "ANN",
+    "RUF",
+    "PTH",
+    "PIE",
+    "PERF",
+    "PGH",
+    "G",
+    "TID",
+    "PT",
+    "RET",
+    "ARG",
+    "TRY",
+    "PL",
+    "DTZ",
+    "T20",
+    "ISC",
+    "TC",
+]
+ignore = [
+    "E501",   # line too long (handled by formatter)
+    "PERF401",
+    "PERF403",
+    "PLR0912",
+    "PLR0913",
+    "PLR0915",
+    "TRY003",
+]
+per-file-ignores = { "tests/**" = ["ANN", "PLR2004", "ARG001"] }
+
+[tool.ruff.lint.isort]
+known-first-party = ["shoebox_seed_organizer"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+exclude = ["(^|/)tests/"]
+warn_unreachable = true
